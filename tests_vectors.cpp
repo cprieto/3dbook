@@ -3,7 +3,7 @@
 #include <catch2/catch.hpp>
 #include "vectors.h"
 
-TEST_CASE("Vector initialization", "") {
+TEST_CASE("Vector initialization", "[vectors]") {
     SECTION("Initializing empty vector") {
         vector3d v{};
 
@@ -36,5 +36,13 @@ TEST_CASE("Vector initialization", "") {
         REQUIRE(v.x == -1);
         REQUIRE(v.y == -2);
         REQUIRE(v.z == -3);
+    }
+}
+
+TEST_CASE("Vector basic operations", "[vectors]") {
+    vector3d v{1, 2, 3};
+
+    SECTION("We can calculate the magnitude") {
+        REQUIRE(magnitude(v) == 3.74166f);
     }
 }
