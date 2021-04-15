@@ -1,10 +1,6 @@
-struct vector3d {
-    float x, y, z;
-    vector3d() = default;
-    vector3d(float x, float y, float z): x{x}, y{y}, z{z} {}
-    float operator [](int idx) {
-        return (&x)[idx];
-    }
-};
+#include "vectors.h"
 
+float& vector3d::operator[](int idx) {
+    return ((&x)[idx]);
+}
 
