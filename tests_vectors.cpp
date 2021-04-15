@@ -37,6 +37,11 @@ TEST_CASE("Vector initialization", "[vectors]") {
         REQUIRE(v.y == -2);
         REQUIRE(v.z == -3);
     }
+
+    SECTION("Vector components are only 3") {
+        REQUIRE_THROWS_AS(v[-1], std::out_of_range);
+        REQUIRE_THROWS_AS(v[4], std::out_of_range);
+    }
 }
 
 TEST_CASE("Vector basic operations", "[vectors]") {
