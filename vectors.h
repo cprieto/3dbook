@@ -8,6 +8,9 @@ struct vector3d {
     float& operator[](int);
     vector3d& operator*=(float);
     vector3d& operator/=(float);
+
+    [[nodiscard]] float magnitude() const;
+    static vector3d normal(const vector3d&);
 };
 
 bool operator==(const vector3d&, const vector3d&);
@@ -16,6 +19,3 @@ vector3d operator*(const vector3d&, float);
 vector3d operator*(float, const vector3d&);
 std::ostream& operator<<(std::ostream&, const vector3d&);
 vector3d operator/(const vector3d&, float);
-
-float magnitude(const vector3d&);
-vector3d normal(const vector3d&);

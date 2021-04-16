@@ -63,7 +63,7 @@ TEST_CASE("Vector basic operations", "[vectors]") {
     vector3d v{1, 2, 3};
 
     SECTION("We can calculate the magnitude") {
-        REQUIRE(magnitude(v) == 3.7416573867739413f);
+        REQUIRE(v.magnitude() == 3.7416573867739413f);
     }
 
     SECTION("We can output the vector as string") {
@@ -98,6 +98,6 @@ TEST_CASE("Vector basic operations", "[vectors]") {
     SECTION("We can get a normal vector") {
         vector3d n{0.26726124f, 0.53452248f, 0.80178368f};
 
-        REQUIRE(normal(v) == n);
+        REQUIRE(vector3d::normal(v) == n);
     }
 }

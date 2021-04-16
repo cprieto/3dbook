@@ -31,8 +31,8 @@ bool operator!=(const vector3d& a, const vector3d& b) {
     return !(a == b);
 }
 
-float magnitude(const vector3d& v) {
-    return std::sqrt(v.x*v.x + v.y*v.y + v.z*v.z);
+float vector3d::magnitude() const {
+    return std::sqrt(x*x + y*y + z*z);
 }
 
 vector3d operator/(const vector3d& v, float scale) {
@@ -52,7 +52,7 @@ vector3d operator*(float scale, const vector3d& v) {
     return v*scale;
 }
 
-vector3d normal(const vector3d& v) {
-    return v / magnitude(v);
+vector3d vector3d::normal(const vector3d& v) {
+    return v / v.magnitude();
 }
 
