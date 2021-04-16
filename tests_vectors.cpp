@@ -63,6 +63,41 @@ TEST_CASE("Vector basic operations", "[vectors]") {
     vector3d v{1, 2, 3};
 
     SECTION("We can calculate the magnitude") {
-        REQUIRE(magnitude(v) == 3.74166f);
+        REQUIRE(magnitude(v) == 3.7416573867739413f);
+    }
+
+    SECTION("We can output the vector as string") {
+        std::stringstream out;
+        out << v;
+        REQUIRE(out.str() == "(1, 2, 3)");
+    }
+
+    SECTION("We can scale a vector") {
+        vector3d scaled{2, 4, 6};
+        REQUIRE(v * 2 == scaled);
+
+        // scaling is commutative
+        REQUIRE(2 * v == scaled);
+
+        // We apply the scale to ourselves
+        REQUIRE(v == vector3d{1, 2, 3});
+        REQUIRE((v *= 2) == scaled);
+        REQUIRE(v == scaled);
+    }
+
+    SECTION("We can divide a vector for a value") {
+        vector3d scaled{0.5, 1, 1.5};
+        REQUIRE(v / 2 == scaled);
+
+        // We apply the scale to ourselves
+        REQUIRE(v == vector3d{1, 2, 3});
+        REQUIRE((v /= 2) == scaled);
+        REQUIRE(v == scaled);
+    }
+
+    SECTION("We can get a normal vector") {
+        vector3d n{0.26726124f, 0.53452248f, 0.80178368f};
+
+        REQUIRE(normal(v) == n);
     }
 }
