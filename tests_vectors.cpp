@@ -42,6 +42,12 @@ TEST_CASE("Vector initialization", "[vectors]") {
         REQUIRE_THROWS_AS(v[-1], std::out_of_range);
         REQUIRE_THROWS_AS(v[4], std::out_of_range);
     }
+
+    SECTION("Equal vectors") {
+        REQUIRE(v == v);
+        REQUIRE(v == vector3d{4, 5, 6});
+        REQUIRE(v != vector3d{1, 2, 3});
+    }
 }
 
 TEST_CASE("Vector basic operations", "[vectors]") {

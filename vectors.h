@@ -6,6 +6,6 @@ struct vector3d {
     float& operator[](int);
 };
 
-inline float magnitude(vector3d v) {
-    return sqrt(v.x*v.x + v.y*v.y + v.z*v.z);
-};
+float magnitude(vector3d v);
+bool operator==(const vector3d&, const vector3d&);
+bool operator!=(const vector3d&, const vector3d&);
