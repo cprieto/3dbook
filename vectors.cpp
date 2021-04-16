@@ -52,7 +52,31 @@ vector3d operator*(float scale, const vector3d& v) {
     return v*scale;
 }
 
+vector3d operator+(const vector3d& a, const vector3d& b) {
+    return vector3d{a.x + b.x, a.y + b.y, a.z + b.z};
+}
+
+vector3d operator-(const vector3d& a, const vector3d& b) {
+    return vector3d{a.x - b.x, a.y - b.y, a.z - b.z};
+}
+
 vector3d vector3d::normal(const vector3d& v) {
     return v / v.magnitude();
+}
+
+vector3d &vector3d::operator+=(const vector3d& other) {
+    x += other.x;
+    y += other.y;
+    z += other.z;
+
+    return (*this);
+}
+
+vector3d &vector3d::operator-=(const vector3d& other) {
+    x -= other.x;
+    y -= other.y;
+    z -= other.z;
+
+    return (*this);
 }
 

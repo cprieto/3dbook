@@ -101,3 +101,33 @@ TEST_CASE("Vector basic operations", "[vectors]") {
         REQUIRE(vector3d::normal(v) == n);
     }
 }
+
+TEST_CASE("Vector addition and substraction", "[vectors]") {
+    vector3d v1{1, 2, 3};
+    vector3d v2{4, 5, 6};
+    vector3d add{5, 7, 9};
+    vector3d sub{3, 3, 3};
+
+    SECTION("We add two vectors") {
+        REQUIRE(v1 + v2 == add);
+    }
+
+    SECTION("We can add to ourselves") {
+        REQUIRE(v1 == vector3d{1, 2, 3});
+
+        REQUIRE((v1 += v2) == add);
+        REQUIRE(v1 == add);
+    }
+
+    SECTION("We can subtract two vectors") {
+        REQUIRE(v2 - v1 == sub);
+    }
+
+    SECTION("We can subtract to ourselves"){
+        REQUIRE(v1 == vector3d{1, 2, 3});
+
+        REQUIRE((v2 -= v1) == sub);
+        REQUIRE(v2 == sub);
+    }
+
+}
