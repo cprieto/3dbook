@@ -48,6 +48,15 @@ TEST_CASE("Vector initialization", "[vectors]") {
         REQUIRE(v == vector3d{4, 5, 6});
         REQUIRE(v != vector3d{1, 2, 3});
     }
+
+    // This requires C++17
+    SECTION("Vector supports structured binding") {
+        const auto& [x, y, z] = v;
+
+        REQUIRE(x == v.x);
+        REQUIRE(y == v.y);
+        REQUIRE(z == v.z);
+    }
 }
 
 TEST_CASE("Vector basic operations", "[vectors]") {
