@@ -7,7 +7,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 list(APPEND CMAKE_MODULE_PATH ${CMAKE_BINARY_DIR})
 find_package(Catch2 REQUIRED)
 
-add_library (vectors OBJECT vectors.cpp)
+add_library (vectors OBJECT src/vectors.cpp)
 
 add_custom_target(test)
 macro(run_test test_target)
@@ -18,8 +18,9 @@ macro(run_test test_target)
     add_dependencies(test ${test_target}_runtest)
 endmacro()
 
+include_directories(src)
 list(APPEND test_sources
-        tests_vectors.cpp)
+        tests/tests_vectors.cpp)
 
 add_executable(all_tests ${test_sources})
 target_link_libraries(all_tests PRIVATE vectors Catch2::Catch2)
