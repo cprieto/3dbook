@@ -6,8 +6,11 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 list(APPEND CMAKE_MODULE_PATH ${CMAKE_BINARY_DIR})
 find_package(Catch2 REQUIRED)
+list(APPEND SOURCES
+        src/vectors.cpp
+        src/matrix.cpp)
 
-add_library (vectors OBJECT src/vectors.cpp src/matrix.cpp)
+add_library (vectors OBJECT ${SOURCES})
 
 add_custom_target(test)
 macro(run_test test_target)
