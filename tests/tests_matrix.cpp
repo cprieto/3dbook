@@ -57,3 +57,18 @@ TEST_CASE("Matrix equality", "[matrix]") {
         REQUIRE(m == m);
     }
 }
+
+TEST_CASE("Transpose matrix", "[matrix]") {
+    matrix3d m(vector3d{1, 2, 3}, vector3d{4, 5, 6}, vector3d{7, 8, 9});
+
+    SECTION("We can transpose a matrix") {
+        auto t = m.transposed();
+
+        REQUIRE(t[0] == vector3d(1, 4, 7));
+        REQUIRE(t[1] == vector3d(2, 5, 8));
+        REQUIRE(t[2] == vector3d(3, 6, 9));
+    }
+}
+
+// TODO: Matrix addition and subtraction
+// TODO: Matrix multiplication by scalar

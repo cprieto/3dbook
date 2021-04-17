@@ -21,6 +21,14 @@ const vector3d& matrix3d::operator[](int idx) const {
     return *reinterpret_cast<const vector3d*>(content.at(idx).data());;
 }
 
+matrix3d matrix3d::transposed() const {
+    return matrix3d({{
+        {content[0][0], content[1][0], content[2][0]},
+        {content[0][1], content[1][1], content[2][1]},
+        {content[0][2], content[1][2], content[2][2]}
+    }});
+}
+
 std::ostream &operator<<(std::ostream& output, const matrix3d& m) {
     output << "[" << m[0] << "," << m[1] << "," << m[2] << "]";
     return output;
