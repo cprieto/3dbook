@@ -1,3 +1,4 @@
+#include <array>
 #include <iostream>
 
 struct vector3d {

@@ -19,6 +19,14 @@ TEST_CASE("Vector initialization", "[vectors]") {
         REQUIRE(v.z == 3);
     }
 
+    SECTION("Initializing a vector from array") {
+        vector3d v = {1, 2, 3};
+
+        REQUIRE(v.x == 1);
+        REQUIRE(v.y == 2);
+        REQUIRE(v.z == 3);
+    }
+
     vector3d v{4, 5, 6};
 
     SECTION("Vector components can be access as array") {
