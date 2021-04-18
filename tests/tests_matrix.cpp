@@ -70,5 +70,38 @@ TEST_CASE("Transpose matrix", "[matrix]") {
     }
 }
 
-// TODO: Matrix addition and subtraction
-// TODO: Matrix multiplication by scalar
+TEST_CASE("Matrix addition, subtraction and scalar multiplication", "[matrix]") {
+    matrix3d a(vector3d{1, 2, 3}, vector3d{4, 5, 6}, vector3d{7, 8, 9});
+    matrix3d b(vector3d{10, 20, 30}, vector3d{40, 50, 60}, vector3d{70, 80, 90});
+
+    SECTION("Addition") {
+        matrix3d result({{
+            {11, 22, 33},
+            {44, 55, 66},
+            {77, 88, 99}}
+        });
+
+        REQUIRE(a + b == result);
+    }
+
+    SECTION("Subtraction") {
+        matrix3d result({{
+                 {-9, -18, -27},
+                 {-36, -45, -54},
+                 {-63, -72, -81}}
+        });
+
+        REQUIRE(a - b == result);
+    }
+
+    SECTION("Scalar multiplication") {
+        matrix3d result({{
+                 {2, 4, 6},
+                 {8, 10, 12},
+                 {14, 16, 18}}
+        });
+
+        REQUIRE(a*2 == result);
+    }
+}
+

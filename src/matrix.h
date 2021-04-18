@@ -13,8 +13,11 @@ public:
     vector3d& operator[](int);
     const vector3d& operator[](int) const;
 
-    matrix3d transposed() const;
+    [[nodiscard]] matrix3d transposed() const;
 };
 
 std::ostream& operator<<(std::ostream&, const matrix3d&);
 bool operator==(const matrix3d&, const matrix3d&);
+matrix3d operator+(const matrix3d&, const matrix3d&);
+matrix3d operator-(const matrix3d&, const matrix3d&);
+matrix3d operator*(const matrix3d&, float);
