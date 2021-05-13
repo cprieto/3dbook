@@ -23,6 +23,22 @@ namespace fged {
             return elements.at(idx);
         }
     };
+
+    template<std::size_t N>
+    bool operator==(const vector<N>& lhs, const vector<N>& rhs){
+        for (std::size_t idx = 0; idx < N; ++idx) {
+            if (lhs[idx] != rhs[idx]) return false;
+        }
+        return true;
+    }
+
+    template<std::size_t N>
+    bool operator!=(const vector<N>& lhs, const vector<N>& rhs) {
+        for (std::size_t idx = 0; idx < N; ++idx) {
+            if (lhs[idx] != rhs[idx]) return true;
+        }
+        return false;
+    }
 }
 
 template<std::size_t N>
@@ -33,13 +49,6 @@ struct std::tuple_element<Idx, fged::vector<N>> {
     using type = float;
 };
 
-template<std::size_t N>
-bool operator==(const fged::vector<N>&, const fged::vector<N>&);
-
-template<std::size_t N>
-bool operator!=(const fged::vector<N>& a, const fged::vector<N>& b) {
-    return true;
-}
 
 template<std::size_t N>
 std::ostream& operator<<(std::ostream& out, const fged::vector<N>& v) {
@@ -52,13 +61,3 @@ std::ostream& operator<<(std::ostream& out, const fged::vector<N>& v) {
 
     return out;
 }
-
-struct vector3d {
-    float x, y, z;
-    vector3d() = default;
-    vector3d(float x, float y, float z): x{x}, y{y}, z{z} {}
-
-    [[nodiscard]] float magnitude() const;
-    static vector3d normal(const vector3d&);
-};
-

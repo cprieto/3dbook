@@ -21,14 +21,21 @@ TEST_CASE("Indexing vector") {
     REQUIRE(v[2] == 3);
 }
 
-//TEST_CASE("Equality") {
-//    vec3d v1{1, 2, 3};
-//    vec3d v2{1, 2, 3};
-//    vec3d v3{4, 5, 6};
-//
-//    REQUIRE(v1 == v2);
-//    REQUIRE_FALSE(v1 == v3);
-//}
+TEST_CASE("Equality operators") {
+    vec3d v1{1, 2, 3};
+    vec3d v2{1, 2, 3};
+    vec3d v3{4, 5, 6};
+
+    SECTION("Equality") {
+        REQUIRE(v1 == v2);
+        REQUIRE_FALSE(v1 == v3);
+    }
+
+    SECTION("Inequality") {
+        REQUIRE(v1 != v3);
+        REQUIRE_FALSE(v1 != v2);
+    }
+}
 
 TEST_CASE("String conversion") {
     vec3d v{1, 2, 3};
