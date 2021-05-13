@@ -1,5 +1,5 @@
-cmake_minimum_required (VERSION 3.19)
-project (3dg)
+cmake_minimum_required(VERSION 3.19)
+project(3dg)
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
@@ -7,10 +7,9 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 list(APPEND CMAKE_MODULE_PATH ${CMAKE_BINARY_DIR})
 find_package(Catch2 REQUIRED)
 list(APPEND SOURCES
-        src/vectors.cpp
-        src/matrix.cpp)
+        src/vectors.cpp)
 
-add_library (vectors OBJECT ${SOURCES})
+add_library(vectors OBJECT ${SOURCES})
 
 add_custom_target(test)
 macro(run_test test_target)
@@ -24,8 +23,7 @@ endmacro()
 include_directories(src)
 list(APPEND test_sources
         tests/all.cpp
-        tests/tests_vectors.cpp
-        tests/tests_matrix.cpp)
+        tests/tests_vectors.cpp)
 
 add_executable(all_tests ${test_sources})
 target_link_libraries(all_tests PRIVATE vectors Catch2::Catch2)

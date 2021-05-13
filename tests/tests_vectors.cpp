@@ -2,139 +2,38 @@
 #include <sstream>
 #include "vectors.h"
 
-TEST_CASE("Vector initialization", "[vectors]") {
-    SECTION("Initializing empty vector") {
-        vector3d v{};
+using vec3d = fged::vector<3>;
 
-        REQUIRE(v.x == 0);
-        REQUIRE(v.y == 0);
-        REQUIRE(v.z == 0);
-    }
+TEST_CASE("Destructuring") {
+    vec3d v{1, 2, 3};
+    auto [x, y, z] = v;
 
-    SECTION("Initializing non empty vector") {
-        vector3d v{1, 2, 3};
-
-        REQUIRE(v.x == 1);
-        REQUIRE(v.y == 2);
-        REQUIRE(v.z == 3);
-    }
-
-    SECTION("Initializing a vector from array") {
-        vector3d v = {1, 2, 3};
-
-        REQUIRE(v.x == 1);
-        REQUIRE(v.y == 2);
-        REQUIRE(v.z == 3);
-    }
-
-    vector3d v{4, 5, 6};
-
-    SECTION("Vector components can be access as array") {
-        REQUIRE(v[0] == v.x);
-        REQUIRE(v[1] == v.y);
-        REQUIRE(v[2] == v.z);
-    }
-
-    SECTION("Vector components can be set as array") {
-        v[0] = -1;
-        v[1] = -2;
-        v[2] = -3;
-
-        REQUIRE(v.x == -1);
-        REQUIRE(v.y == -2);
-        REQUIRE(v.z == -3);
-    }
-
-    SECTION("Vector components are only 3") {
-        REQUIRE_THROWS_AS(v[-1], std::out_of_range);
-        REQUIRE_THROWS_AS(v[4], std::out_of_range);
-    }
-
-    SECTION("Equal vectors") {
-        REQUIRE(v == v);
-        REQUIRE(v == vector3d{4, 5, 6});
-        REQUIRE(v != vector3d{1, 2, 3});
-    }
-
-    // This requires C++17
-    SECTION("Vector supports structured binding") {
-        const auto& [x, y, z] = v;
-
-        REQUIRE(x == v.x);
-        REQUIRE(y == v.y);
-        REQUIRE(z == v.z);
-    }
+    REQUIRE(x == 1);
+    REQUIRE(y == 2);
+    REQUIRE(z == 3);
 }
 
-TEST_CASE("Vector basic operations", "[vectors]") {
-    vector3d v{1, 2, 3};
+TEST_CASE("Indexing vector") {
+    vec3d v{1, 2, 3};
 
-    SECTION("We can calculate the magnitude") {
-        REQUIRE(v.magnitude() == 3.7416573867739413f);
-    }
-
-    SECTION("We can output the vector as string") {
-        std::stringstream out;
-        out << v;
-        REQUIRE(out.str() == "(1, 2, 3)");
-    }
-
-    SECTION("We can scale a vector") {
-        vector3d scaled{2, 4, 6};
-        REQUIRE(v * 2 == scaled);
-
-        // scaling is commutative
-        REQUIRE(2 * v == scaled);
-
-        // We apply the scale to ourselves
-        REQUIRE(v == vector3d{1, 2, 3});
-        REQUIRE((v *= 2) == scaled);
-        REQUIRE(v == scaled);
-    }
-
-    SECTION("We can divide a vector for a value") {
-        vector3d scaled{0.5, 1, 1.5};
-        REQUIRE(v / 2 == scaled);
-
-        // We apply the scale to ourselves
-        REQUIRE(v == vector3d{1, 2, 3});
-        REQUIRE((v /= 2) == scaled);
-        REQUIRE(v == scaled);
-    }
-
-    SECTION("We can get a normal vector") {
-        vector3d n{0.26726124f, 0.53452248f, 0.80178368f};
-
-        REQUIRE(vector3d::normal(v) == n);
-    }
+    REQUIRE(v[0] == 1);
+    REQUIRE(v[1] == 2);
+    REQUIRE(v[2] == 3);
 }
 
-TEST_CASE("Vector addition and substraction", "[vectors]") {
-    vector3d v1{1, 2, 3};
-    vector3d v2{4, 5, 6};
-    vector3d add{5, 7, 9};
-    vector3d sub{3, 3, 3};
+//TEST_CASE("Equality") {
+//    vec3d v1{1, 2, 3};
+//    vec3d v2{1, 2, 3};
+//    vec3d v3{4, 5, 6};
+//
+//    REQUIRE(v1 == v2);
+//    REQUIRE_FALSE(v1 == v3);
+//}
 
-    SECTION("We add two vectors") {
-        REQUIRE(v1 + v2 == add);
-    }
+TEST_CASE("String conversion") {
+    vec3d v{1, 2, 3};
 
-    SECTION("We can add to ourselves") {
-        REQUIRE(v1 == vector3d{1, 2, 3});
-
-        REQUIRE((v1 += v2) == add);
-        REQUIRE(v1 == add);
-    }
-
-    SECTION("We can subtract two vectors") {
-        REQUIRE(v2 - v1 == sub);
-    }
-
-    SECTION("We can subtract to ourselves"){
-        REQUIRE(v1 == vector3d{1, 2, 3});
-
-        REQUIRE((v2 -= v1) == sub);
-        REQUIRE(v2 == sub);
-    }
-
+    std::stringstream out;
+    out << v;
+    REQUIRE(out.str() == "(1, 2, 3)");
 }

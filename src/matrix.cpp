@@ -5,15 +5,15 @@ float &matrix3d::operator()(int m, int n) {
     return content[m][n];
 }
 
-vector3d &matrix3d::operator[](int idx) {
-    return *reinterpret_cast<vector3d *>(content.at(idx).data());
+vec3d &matrix3d::operator[](int idx) {
+    return *reinterpret_cast<vec3d *>(content.at(idx).data());
 }
 
 const float &matrix3d::operator()(int m, int n) const {
     return content[m][n];
 }
 
-matrix3d::matrix3d(const vector3d &a, const vector3d &b, const vector3d &c) : content{
+matrix3d::matrix3d(const vec3d &a, const vec3d &b, const vec3d &c) : content{
         std::array<std::array<float, 3>, 3>{{
             {a.x, a.y, a.z},
             {b.x, b.y, b.z},
@@ -21,8 +21,8 @@ matrix3d::matrix3d(const vector3d &a, const vector3d &b, const vector3d &c) : co
         }} {}
 
 
-const vector3d &matrix3d::operator[](int idx) const {
-    return *reinterpret_cast<const vector3d *>(content.at(idx).data());;
+const vec3d &matrix3d::operator[](int idx) const {
+    return *reinterpret_cast<const vec3d *>(content.at(idx).data());;
 }
 
 matrix3d matrix3d::transposed() const {
