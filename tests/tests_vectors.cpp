@@ -2,6 +2,7 @@
 #include <sstream>
 #include "vectors.h"
 
+using namespace Catch::literals;
 using vec3d = fged::vector<3>;
 
 TEST_CASE("Destructuring") {
@@ -78,5 +79,29 @@ TEST_CASE("Vector arithmetic") {
         REQUIRE(result[0] == 2);
         REQUIRE(result[1] == 4);
         REQUIRE(result[2] == 6);
+    }
+
+    SECTION("Scaling a vector, lhs") {
+        const auto result = v1 * 3;
+
+        REQUIRE(result[0] == 3);
+        REQUIRE(result[1] == 6);
+        REQUIRE(result[2] == 9);
+    }
+
+    SECTION("Scaling a vector, rhs") {
+        const auto result = 2 * v1;
+
+        REQUIRE(result[0] == 2);
+        REQUIRE(result[1] == 4);
+        REQUIRE(result[2] == 6);
+    }
+
+    SECTION("Descaling a vector") {
+        const auto result = v1 / 3;
+
+        REQUIRE(result[0] == 0.33333_a);
+        REQUIRE(result[1] == 0.66667_a);
+        REQUIRE(result[2] == 1);
     }
 }

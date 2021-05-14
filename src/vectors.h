@@ -80,3 +80,30 @@ fged::vector<N> operator-(const fged::vector<N> lhs, const fged::vector<N>& rhs)
     }
     return fged::vector<N>{result};
 }
+
+template<std::size_t N>
+fged::vector<N> operator*(const fged::vector<N>& lhs, const float rhs) {
+    std::array<float, N> result;
+    for (std::size_t idx = 0; idx < N; ++idx) {
+        result[idx] = lhs[idx] * rhs;
+    }
+    return fged::vector<N>{result};
+}
+
+template<std::size_t N>
+fged::vector<N> operator*(const float lhs, const fged::vector<N>& rhs) {
+    std::array<float, N> result;
+    for (std::size_t idx = 0; idx < N; ++idx) {
+        result[idx] = lhs * rhs[idx];
+    }
+    return fged::vector<N>{result};
+}
+
+template<std::size_t N>
+fged::vector<N> operator/(const fged::vector<N>& lhs, const float rhs) {
+    std::array<float, N> result;
+    for (std::size_t idx = 0; idx < N; ++idx) {
+        result[idx] = lhs[idx] / rhs;
+    }
+    return fged::vector<N>{result};
+}
