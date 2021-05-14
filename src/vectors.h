@@ -14,6 +14,8 @@ namespace fged {
         template<typename... Args, vector_ctor_t<N, Args...>* = nullptr>
         vector(Args... args): elements{static_cast<float>(args)...}{} // NOLINT(google-explicit-constructor)
 
+        vector(std::array<float, N> args): elements{args} {}
+
         template <std::size_t Idx>
         [[nodiscard]] float get() const {
             return elements.at(Idx);
@@ -49,7 +51,6 @@ struct std::tuple_element<Idx, fged::vector<N>> {
     using type = float;
 };
 
-
 template<std::size_t N>
 std::ostream& operator<<(std::ostream& out, const fged::vector<N>& v) {
     out << "(";
@@ -60,4 +61,22 @@ std::ostream& operator<<(std::ostream& out, const fged::vector<N>& v) {
     out << ")";
 
     return out;
+}
+
+template<std::size_t N>
+fged::vector<N> operator+(const fged::vector<N>& lhs, const fged::vector<N>& rhs) {
+    std::array<float, N> result;
+    for (std::size_t idx = 0; idx < N; ++idx) {
+        result[idx] = lhs[idx] + rhs[idx];
+    }
+    return fged::vector<N>{result};
+}
+
+template<std::size_t N>
+fged::vector<N> operator-(const fged::vector<N> lhs, const fged::vector<N>& rhs) {
+    std::array<float, N> result;
+    for (std::size_t idx = 0; idx < N; ++idx) {
+        result[idx] = lhs[idx] - rhs[idx];
+    }
+    return fged::vector<N>{result};
 }

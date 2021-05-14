@@ -6,8 +6,12 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 list(APPEND CMAKE_MODULE_PATH ${CMAKE_BINARY_DIR})
 find_package(Catch2 REQUIRED)
+
 list(APPEND SOURCES
         src/vectors.cpp)
+
+list(APPEND HEADERS
+        src/vectors.h)
 
 add_library(vectors OBJECT ${SOURCES})
 

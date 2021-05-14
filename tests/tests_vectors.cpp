@@ -44,3 +44,39 @@ TEST_CASE("String conversion") {
     out << v;
     REQUIRE(out.str() == "(1, 2, 3)");
 }
+
+TEST_CASE("Vector arithmetic") {
+    vec3d v1{1, 2, 3};
+
+    SECTION("Adding two positive vectors") {
+        const auto result = v1 + v1;
+
+        REQUIRE(result[0] == 2);
+        REQUIRE(result[1] == 4);
+        REQUIRE(result[2] == 6);
+    }
+
+    SECTION("Adding positive and negative vectors") {
+        const auto result = v1 + vec3d{-2, -3, -4};
+
+        REQUIRE(result[0] == -1);
+        REQUIRE(result[1] == -1);
+        REQUIRE(result[2] == -1);
+    }
+
+    SECTION("Subtracting two vectors") {
+        const auto result = v1 - v1;
+
+        REQUIRE(result[0] == 0);
+        REQUIRE(result[1] == 0);
+        REQUIRE(result[2] == 0);
+    }
+
+    SECTION("Subtracting a positive and negative vector") {
+        const auto result = v1 - vec3d{-1, -2, -3};
+
+        REQUIRE(result[0] == 2);
+        REQUIRE(result[1] == 4);
+        REQUIRE(result[2] == 6);
+    }
+}
